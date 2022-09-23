@@ -4,6 +4,7 @@ import {
   signupService,
   verifyingTokenService,
 } from "../services/authApi";
+import Swal from "sweetalert2";
 
 export const AuthContext = createContext({});
 
@@ -11,7 +12,7 @@ const initialState = {
   id: null,
   email: null,
   username: null,
-  password: null,
+  image: null,
   authStatus: false,
 };
 
@@ -19,17 +20,27 @@ export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(initialState);
 
   const login = async (form) => {
-    const resp = await loginService(form);
+    try {
+      const resp = await loginService(form);
 
-    if (resp.ok) {
-      localStorage.setItem("token", resp.token);
+      if (resp.ok) {
+        localStorage.setItem("token", resp.token);
 
-      setAuth({
-        id: resp.data.id,
-        username: resp.data.username,
-        email: resp.data.email,
-        password: resp.data.rol,
-        authStatus: true,
+        setAuth({
+          id: resp.data.id,
+          username: resp.data.username,
+          email: resp.data.email,
+          image: resp.data.image,
+          authStatus: true,
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: `error`,
+        title: `Error ${error.response.status}`,
+        text: error.response.data.msg,
+        showConfirmButton: false,
+        timer: 3000,
       });
     }
   };
@@ -45,39 +56,57 @@ export const AuthProvider = ({ children }) => {
           id: resp.data.id,
           username: resp.data.username,
           email: resp.data.email,
-          password: resp.data.rol,
+          image: resp.data.image,
           authStatus: true,
         });
       }
     } catch (error) {
-      console.log(error.response.data.msg);
+      Swal.fire({
+        icon: `error`,
+        title: `Error ${error.response.status}`,
+        text: error.response.data.msg,
+        showConfirmButton: false,
+        timer: 3000,
+      });
     }
   };
 
   const verifyingToken = useCallback(async () => {
-    const token = localStorage.getItem("token");
+    try {
+      const token = localStorage.getItem("token");
 
-    if (token) {
-      const resp = await verifyingTokenService();
-      if (resp.ok) {
-        localStorage.setItem("token", resp.token);
+      if (token) {
+        const resp = await verifyingTokenService();
+        if (resp.ok) {
+          localStorage.setItem("token", resp.token);
 
+          setAuth({
+            id: resp.data.id,
+            username: resp.data.username,
+            email: resp.data.email,
+            image: resp.data.image,
+            authStatus: true,
+          });
+        }
+      } else {
+        localStorage.removeItem("token");
         setAuth({
-          id: resp.data.id,
-          username: resp.data.username,
-          email: resp.data.email,
-          password: resp.data.rol,
-          authStatus: true,
+          id: null,
+          email: null,
+          username: null,
+          password: null,
+          image: null,
+          authStatus: false,
         });
       }
-    } else {
-      console.log("verifyingToken, no hubo token");
-      setAuth({
-        id: null,
-        email: null,
-        username: null,
-        password: null,
-        authStatus: false,
+    } catch (error) {
+      localStorage.removeItem("token");
+      Swal.fire({
+        icon: `error`,
+        title: `Error ${error.response.status}`,
+        text: error.response.data.msg,
+        showConfirmButton: false,
+        timer: 3000,
       });
     }
   }, []);
@@ -88,7 +117,6 @@ export const AuthProvider = ({ children }) => {
       id: null,
       email: null,
       username: null,
-      password: null,
       authStatus: false,
     });
   };

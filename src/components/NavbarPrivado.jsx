@@ -1,9 +1,17 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const NavbarPrivado = () => {
   const { auth, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
+
   return (
     <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
       <div className="container">
@@ -67,7 +75,7 @@ const NavbarPrivado = () => {
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <button className="dropdown-item" onClick={logout}>
+                    <button className="dropdown-item" onClick={handleLogout}>
                       Logout
                     </button>
                   </li>
