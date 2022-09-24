@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const URL_ROOT = `https://demo-api-2.onrender.com/api/auth`;
-const URL_ROOT = `http://localhost:4002/api/auth`;
+const URL_ROOT = `https://dwfs-demo-day-api.onrender.com/api/auth`;
+// const URL_ROOT = `http://localhost:4002/api/auth`;
 
 export const loginService = async (data) => {
   const resp = await axios.post(`${URL_ROOT}/login`, data);

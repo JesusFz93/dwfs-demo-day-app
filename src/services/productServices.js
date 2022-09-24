@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL_ROOT = `https://demo-api-2.onrender.com/api/products`;
+const URL_ROOT = `https://dwfs-demo-day-api.onrender.com/api/products`;
 
 export const obtenerProductosService = async () => {
   const resp = await axios.get(`${URL_ROOT}`, {
