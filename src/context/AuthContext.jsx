@@ -5,6 +5,7 @@ import {
   verifyingTokenService,
 } from "../services/authApi";
 import Swal from "sweetalert2";
+import { actualizarUsuarioService } from "../services/userServices";
 
 export const AuthContext = createContext({});
 
@@ -14,6 +15,7 @@ const initialState = {
   username: null,
   image: null,
   authStatus: false,
+  loading: false,
 };
 
 export const AuthProvider = ({ children }) => {
@@ -22,6 +24,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (form) => {
     try {
       const resp = await loginService(form);
+      setAuth({ ...auth, loading: true });
 
       if (resp.ok) {
         localStorage.setItem("token", resp.token);
@@ -32,6 +35,7 @@ export const AuthProvider = ({ children }) => {
           email: resp.data.email,
           image: resp.data.image,
           authStatus: true,
+          loading: false,
         });
       }
     } catch (error) {
@@ -47,6 +51,7 @@ export const AuthProvider = ({ children }) => {
 
   const signup = async (form) => {
     try {
+      setAuth({ ...auth, loading: true });
       const resp = await signupService(form);
 
       if (resp.ok) {
@@ -58,9 +63,11 @@ export const AuthProvider = ({ children }) => {
           email: resp.data.email,
           image: resp.data.image,
           authStatus: true,
+          loading: false,
         });
       }
     } catch (error) {
+      setAuth({ ...auth, loading: false });
       Swal.fire({
         icon: `error`,
         title: `Error ${error.response.status}`,
@@ -86,6 +93,7 @@ export const AuthProvider = ({ children }) => {
             email: resp.data.email,
             image: resp.data.image,
             authStatus: true,
+            loading: false,
           });
         }
       } else {
@@ -118,7 +126,32 @@ export const AuthProvider = ({ children }) => {
       email: null,
       username: null,
       authStatus: false,
+      loading: false,
     });
+  };
+
+  const actualizarUsuario = async (id, form) => {
+    try {
+      const resp = await actualizarUsuarioService(id, form);
+
+      if (resp.ok) {
+        setAuth({
+          ...auth,
+          id: resp.data.id,
+          username: resp.data.username,
+          email: resp.data.email,
+          image: resp.data.image,
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: `error`,
+        title: `Error ${error.response.status}`,
+        text: error.response.data.msg,
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    }
   };
 
   return (
@@ -129,6 +162,7 @@ export const AuthProvider = ({ children }) => {
         signup,
         verifyingToken,
         logout,
+        actualizarUsuario,
       }}
     >
       {children}
