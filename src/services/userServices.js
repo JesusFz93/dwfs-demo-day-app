@@ -9,6 +9,5 @@ export const actualizarUsuarioService = async (id, form) => {
       "auth-token": localStorage.getItem("token"),
     },
   });
-  console.log(resp.data);
   return resp.data;
 };

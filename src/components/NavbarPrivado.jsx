@@ -42,6 +42,28 @@ const NavbarPrivado = () => {
                 Home
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+                aria-current="page"
+                to="/events"
+              >
+                Eventos
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+                aria-current="page"
+                to="/reservations"
+              >
+                Reservaciones
+              </NavLink>
+            </li>
           </ul>
           <div className="">
             <ul className="navbar-nav mb-2 mb-lg-0">

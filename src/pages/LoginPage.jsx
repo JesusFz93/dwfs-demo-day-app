@@ -3,8 +3,8 @@ import { AuthContext } from "../context/AuthContext";
 import Title from "../components/Title";
 
 const initForm = {
-  username: "sebastian",
-  password: "121212",
+  username: "ucamp",
+  password: "ucamp",
 };
 
 const LoginPage = () => {

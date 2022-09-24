@@ -6,6 +6,8 @@ const initialState = {
   username: "",
   password: "",
   image: "",
+  firstName: "",
+  lastName: "",
 };
 
 const EditUserModal = () => {
@@ -28,6 +30,8 @@ const EditUserModal = () => {
       email: auth.email,
       username: auth.username,
       image: auth.image,
+      firstName: auth.firstName,
+      lastName: auth.lastName,
       password: "",
     });
   }, [auth]);
@@ -77,6 +81,32 @@ const EditUserModal = () => {
                 id="userUserName"
                 name="username"
                 value={userForm.username}
+                onChange={handleFieldChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="userFirstName" className="form-label">
+                Nombre
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="userFirstName"
+                name="firstName"
+                value={userForm.firstName}
+                onChange={handleFieldChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="userLastName" className="form-label">
+                Apellido
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="userLastName"
+                name="lastName"
+                value={userForm.lastName}
                 onChange={handleFieldChange}
               />
             </div>

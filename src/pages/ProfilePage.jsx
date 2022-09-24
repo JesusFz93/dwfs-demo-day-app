@@ -19,6 +19,8 @@ const ProfilePage = () => {
             <div className="card-body">
               <h5 className="card-title">Usuario: {auth.username}</h5>
               <p className="card-text">Correo: {auth.email}</p>
+              <p className="card-title">Nombre: {auth.firstName}</p>
+              <p className="card-text">Apellido: {auth.lastName}</p>
               <button
                 type="button"
                 className="btn btn-warning"

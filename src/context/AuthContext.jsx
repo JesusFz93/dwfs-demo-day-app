@@ -14,6 +14,8 @@ const initialState = {
   email: null,
   username: null,
   image: null,
+  firstName: null,
+  lastName: null,
   authStatus: false,
   loading: false,
 };
@@ -34,6 +36,8 @@ export const AuthProvider = ({ children }) => {
           username: resp.data.username,
           email: resp.data.email,
           image: resp.data.image,
+          firstName: resp.data.firstName,
+          lastName: resp.data.lastName,
           authStatus: true,
           loading: false,
         });
@@ -62,6 +66,8 @@ export const AuthProvider = ({ children }) => {
           username: resp.data.username,
           email: resp.data.email,
           image: resp.data.image,
+          firstName: resp.data.firstName,
+          lastName: resp.data.lastName,
           authStatus: true,
           loading: false,
         });
@@ -92,6 +98,8 @@ export const AuthProvider = ({ children }) => {
             username: resp.data.username,
             email: resp.data.email,
             image: resp.data.image,
+            firstName: resp.data.firstName,
+            lastName: resp.data.lastName,
             authStatus: true,
             loading: false,
           });
@@ -102,6 +110,8 @@ export const AuthProvider = ({ children }) => {
           id: null,
           email: null,
           username: null,
+          firstName: null,
+          lastName: null,
           password: null,
           image: null,
           authStatus: false,
@@ -125,6 +135,8 @@ export const AuthProvider = ({ children }) => {
       id: null,
       email: null,
       username: null,
+      firstName: null,
+      lastName: null,
       authStatus: false,
       loading: false,
     });
@@ -141,6 +153,8 @@ export const AuthProvider = ({ children }) => {
           username: resp.data.username,
           email: resp.data.email,
           image: resp.data.image,
+          firstName: resp.data.firstName,
+          lastName: resp.data.lastName,
         });
       }
     } catch (error) {
