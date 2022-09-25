@@ -12,6 +12,12 @@ const reducer = (globalState, action) => {
         event: action.payload,
       };
 
+    case "OBTENER_RESERVACIONES":
+      return {
+        ...globalState,
+        reservations: action.payload,
+      };
+
     default:
       return globalState;
   }

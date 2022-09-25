@@ -3,7 +3,7 @@ import {
   loginService,
   signupService,
   verifyingTokenService,
-} from "../services/authApi";
+} from "../services/authServices";
 import Swal from "sweetalert2";
 import { actualizarUsuarioService } from "../services/userServices";
 

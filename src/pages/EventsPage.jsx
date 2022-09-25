@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import AppContext from "../context/AppContext";
-import ProductCard from "../components/ProductCard";
+import EventCard from "../components/EventCard";
 
 const EventsPage = () => {
   const { events, obtenerEventos } = useContext(AppContext);
@@ -15,8 +15,7 @@ const EventsPage = () => {
         <article className="col">
           <div className="row row-cols-1 row-cols-md-3 g-4">
             {events.map((event) => (
-              <ProductCard key={event.id} {...event} />
-              // <p>Elementos</p>
+              <EventCard key={event.id} {...event} />
             ))}
           </div>
         </article>

@@ -29,9 +29,9 @@ const EditUserModal = () => {
     setUserForm({
       email: auth.email,
       username: auth.username,
-      image: auth.image,
-      firstName: auth.firstName,
-      lastName: auth.lastName,
+      image: auth.image || "",
+      firstName: auth.firstName || "",
+      lastName: auth.lastName || "",
       password: "",
     });
   }, [auth]);

@@ -75,6 +75,16 @@ const NavbarPrivado = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
+                  {auth.image && (
+                    <img
+                      src={auth.image}
+                      className="img-fluid"
+                      width="30"
+                      height="24"
+                      alt={auth.username}
+                    />
+                  )}
+
                   {auth.username}
                 </a>
                 <ul className="dropdown-menu dropdown-menu-end">

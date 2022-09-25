@@ -19,6 +19,7 @@ const RutasPrivadas = () => {
           <Route path="/events" element={<EventsPage />} />
           <Route path="/events/:id" element={<EventPage />} />
           <Route path="/reservations" element={<ReservationsPage />} />
+          <Route path="/reservations/:id" element={<ReservationsPage />} />
 
           {/* Rutas publicas y privadas */}
           <Route path="/" element={<HomePage />} />

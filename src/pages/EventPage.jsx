@@ -44,7 +44,9 @@ const EventPage = () => {
 
           <div className="d-grid">
             {event.available ? (
-              <button className="btn btn-success">Reservar</button>
+              <NavLink className="btn btn-success" to={`/reservations/${id}`}>
+                Reservar
+              </NavLink>
             ) : (
               <button className="btn btn-danger" disabled>
                 AGOTADO
@@ -53,6 +55,9 @@ const EventPage = () => {
           </div>
         </article>
       </main>
+      <section className="row pb-5">
+        <article className="col-md-12">{event.description}</article>
+      </section>
     </>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const ProductCard = ({
+const EventCard = ({
   id,
   name,
   place,
@@ -42,7 +42,9 @@ const ProductCard = ({
             </small>
             <small className="text-muted">
               {available ? (
-                <button className="btn btn-success">Reservar</button>
+                <NavLink className="btn btn-success" to={`/reservations/${id}`}>
+                  Reservar
+                </NavLink>
               ) : (
                 <button className="btn btn-danger" disabled>
                   AGOTADO
@@ -56,4 +58,4 @@ const ProductCard = ({
   );
 };
 
-export default ProductCard;
+export default EventCard;

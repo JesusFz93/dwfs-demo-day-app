@@ -7,10 +7,17 @@ import {
   obtenerEventoService,
 } from "../services/eventsServices";
 
+import {
+  cancelarReservacionService,
+  crearReservacionService,
+  obtenerReservacionesService,
+} from "../services/reservationsServices";
+
 const AppState = ({ children }) => {
   const initialState = {
     events: [],
     event: {},
+    reservations: [],
   };
 
   const [globalState, dispatch] = useReducer(appReducer, initialState);
@@ -30,11 +37,9 @@ const AppState = ({ children }) => {
   }, []);
 
   const obtenerEvento = useCallback(async (id) => {
-    console.log("sadass");
     try {
       const res = await obtenerEventoService(id);
       const evento = res.data;
-      console.log(evento);
 
       dispatch({
         type: "OBTENER_EVENTO",
@@ -45,6 +50,38 @@ const AppState = ({ children }) => {
     }
   }, []);
 
+  const crearReservacion = async (form) => {
+    try {
+      await crearReservacionService(form);
+      await obtenerReservaciones();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const obtenerReservaciones = useCallback(async () => {
+    try {
+      const res = await obtenerReservacionesService();
+      const reservaciones = res.data;
+
+      dispatch({
+        type: "OBTENER_RESERVACIONES",
+        payload: reservaciones,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  const cancelarReservacion = async (id) => {
+    try {
+      await cancelarReservacionService(id);
+      await obtenerReservaciones();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -52,6 +89,10 @@ const AppState = ({ children }) => {
         obtenerEventos,
         obtenerEvento,
         event: globalState.event,
+        crearReservacion,
+        obtenerReservaciones,
+        reservations: globalState.reservations,
+        cancelarReservacion,
       }}
     >
       {children}
